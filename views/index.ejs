@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  table#t01 {
+    width: 100%;    
+    background-color: #f1f1c1;
+  }
+</style>
+  <title>List View</title>
+<!--   <link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div style="margin:100px;">
+    <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Hypothetical Library</a>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">List View</a>
+      </li>
+      <li>
+        <a href="/create">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+      <h1>Manage Books</h1>
+      <p>A simple web application to manage books for a hypothetical library.
+      </p>
+      <table style="width:100%">
+        <tr>
+          <th><center>ISBN</center></th>
+          <th><center>Book Title</center></th> 
+          <th><center>Author</center></th>
+          <th><center>Published Year</center></th>
+          <th><center>UUID</center></th>
+          <th><center>Created At</center></th>
+          <th><center>Action</center></th>
+        </tr>
+
+
+        <% books.forEach(function(book){ %>
+        <tr>
+
+          <td><center><%= book.isbn %></center></td>
+          <td><center><a href="/<%= book.title %>-<%= String(book.uuid).slice(-6) %>/view"><%= book.title %></a></center></td>
+          <td><center><%= book.author %></center></td>
+          <td><center><%= book.published %></center></td>
+          <td><center><%= book.uuid %></center></td>
+          <td><center><%= book.createdAt %></center></td>
+
+          <td>           
+            <a href="/<%= book.isbn %>/edit">
+              <img src="/public/img/edit.png" height="20" width="20" alt="logo" class="logo-default"/>
+            </a>
+
+            <a href="/<%= book.isbn %>" onclick='return confirm("You are going to delete this record. Continue?")'>
+              <img src="/public/img/del.png" height="20" width="20" alt="logo" class="logo-default"/>
+            </a>
+          </td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
